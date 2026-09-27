@@ -1,0 +1,5054 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>سامانه هوشمند مدرسه</title>
+
+<style>
+:root{
+    --primary:#2563eb;
+    --primary2:#3b82f6;
+    --dark:#172554;
+    --sidebar:#172554;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --green:#16a34a;
+    --red:#dc2626;
+    --orange:#f59e0b;
+    --purple:#7c3aed;
+    --shadow:0 8px 25px rgba(15,23,42,.07);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.25s;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= LOGIN ================= */
+
+.login-screen{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+
+    background:
+        radial-gradient(circle at top right,#60a5fa55,transparent 35%),
+        radial-gradient(circle at bottom left,#8b5cf655,transparent 35%),
+        linear-gradient(135deg,#eff6ff,#e0e7ff);
+}
+
+.login-box{
+    width:430px;
+    max-width:100%;
+    background:white;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 25px 70px rgba(15,23,42,.18);
+}
+
+.login-header{
+    background:
+        linear-gradient(135deg,#1d4ed8,#3b82f6);
+    color:white;
+    padding:35px 25px;
+    text-align:center;
+}
+
+.school-logo{
+    width:82px;
+    height:82px;
+    border-radius:24px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    background:#ffffff22;
+    border:1px solid #ffffff55;
+    backdrop-filter:blur(8px);
+}
+
+.login-header h1{
+    margin:15px 0 5px;
+    font-size:24px;
+}
+
+.login-header p{
+    margin:0;
+    opacity:.85;
+}
+
+.login-body{
+    padding:28px;
+}
+
+.input-group{
+    margin-bottom:17px;
+}
+
+.input-group label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.input{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    outline:none;
+    background:#f8fafc;
+}
+
+.input:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px #2563eb18;
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:11px;
+    background:var(--primary);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.login-error{
+    color:var(--red);
+    text-align:center;
+    min-height:20px;
+    font-size:13px;
+}
+
+/* ================= HEADER ================= */
+
+.app{
+    min-height:100vh;
+}
+
+.header{
+    height:76px;
+    background:linear-gradient(
+        100deg,
+        #1d4ed8,
+        #2563eb,
+        #3b82f6
+    );
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 4px 18px #0f172a22;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.header-avatar{
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#ffffff22;
+    border:1px solid #ffffff44;
+    font-size:24px;
+}
+
+.header-name{
+    font-weight:bold;
+}
+
+.header-sub{
+    font-size:11px;
+    opacity:.8;
+    margin-top:3px;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.icon-button{
+    border:0;
+    background:#ffffff18;
+    color:white;
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    font-size:19px;
+}
+
+.icon-button:hover{
+    background:#ffffff30;
+}
+
+/* ================= LAYOUT ================= */
+
+.layout{
+    display:flex;
+    min-height:calc(100vh - 76px);
+}
+
+.sidebar{
+    width:245px;
+    background:var(--sidebar);
+    color:white;
+    flex-shrink:0;
+    padding:13px 10px;
+    transition:.25s;
+}
+
+.sidebar-title{
+    padding:12px 15px;
+    font-size:12px;
+    color:#bfdbfe;
+    font-weight:bold;
+}
+
+.nav-item{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#dbeafe;
+    border-radius:12px;
+    padding:12px 14px;
+    margin-bottom:4px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    text-align:right;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.nav-item:hover{
+    background:#ffffff12;
+}
+
+.nav-item.active{
+    background:#2563eb;
+    color:white;
+    box-shadow:0 5px 15px #2563eb44;
+}
+
+.nav-icon{
+    width:27px;
+    text-align:center;
+    font-size:17px;
+}
+
+.nav-badge{
+    margin-right:auto;
+    background:#ef4444;
+    color:white;
+    font-size:10px;
+    border-radius:20px;
+    padding:3px 7px;
+}
+
+.logout{
+    margin-top:15px;
+    background:#dc262622;
+    color:#fecaca;
+}
+
+.main{
+    flex:1;
+    padding:20px;
+    min-width:0;
+}
+
+.page{
+    max-width:1450px;
+    margin:auto;
+}
+
+/* ================= TITLE ================= */
+
+.page-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.page-title{
+    margin:0;
+    font-size:24px;
+}
+
+.page-subtitle{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:10px 15px;
+    font-weight:bold;
+    font-size:13px;
+    background:var(--primary);
+    color:white;
+}
+
+.btn:hover{
+    filter:brightness(.95);
+    transform:translateY(-1px);
+}
+
+.btn.green{
+    background:var(--green);
+}
+
+.btn.red{
+    background:var(--red);
+}
+
+.btn.orange{
+    background:var(--orange);
+}
+
+.btn.gray{
+    background:#64748b;
+}
+
+.btn.light{
+    background:#e2e8f0;
+    color:#1e293b;
+}
+
+/* ================= CARDS ================= */
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:18px;
+    box-shadow:var(--shadow);
+}
+
+.card-title{
+    margin:0 0 14px;
+    font-size:16px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(230px,1fr));
+    gap:15px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    position:relative;
+    overflow:hidden;
+}
+
+.stat-icon{
+    width:47px;
+    height:47px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    background:#dbeafe;
+    color:#1d4ed8;
+    margin-bottom:13px;
+}
+
+.stat-number{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+}
+
+.stat-blue .stat-icon{
+    background:#dbeafe;
+}
+
+.stat-green .stat-icon{
+    background:#dcfce7;
+}
+
+.stat-orange .stat-icon{
+    background:#fef3c7;
+}
+
+.stat-purple .stat-icon{
+    background:#ede9fe;
+}
+
+/* ================= FORM ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+    gap:12px;
+}
+
+.field{
+    margin-bottom:11px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    display:block;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.input,
+select,
+textarea{
+    width:100%;
+    padding:11px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#f8fafc;
+    outline:none;
+}
+
+select{
+    height:43px;
+}
+
+.input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--primary);
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th,
+td{
+    padding:11px;
+    border-bottom:1px solid var(--border);
+    text-align:right;
+    font-size:13px;
+}
+
+th{
+    color:#475569;
+    background:#f8fafc;
+}
+
+tr:hover td{
+    background:#f8fafc;
+}
+
+/* ================= BADGE ================= */
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    border-radius:30px;
+    padding:5px 9px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.badge.green{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.badge.red{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.badge.blue{
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+.badge.orange{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.badge.purple{
+    background:#ede9fe;
+    color:#5b21b6;
+}
+
+/* ================= WELCOME ================= */
+
+.welcome{
+    background:
+        linear-gradient(120deg,#1d4ed8,#3b82f6);
+    color:white;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.welcome:after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:#ffffff12;
+    left:-50px;
+    top:-80px;
+}
+
+.welcome h2{
+    margin:0 0 7px;
+}
+
+.welcome p{
+    margin:0;
+    opacity:.85;
+}
+
+/* ================= QUICK ================= */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(145px,1fr));
+    gap:12px;
+}
+
+.quick{
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:15px;
+    padding:18px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.quick:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow);
+}
+
+.quick-icon{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.quick-title{
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* ================= NOTICE ================= */
+
+.notice{
+    border-right:4px solid var(--primary);
+    padding:13px;
+    background:#f8fafc;
+    border-radius:10px;
+    margin-bottom:9px;
+}
+
+.notice-title{
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.notice-text{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+    text-align:center;
+    color:var(--muted);
+    padding:40px 15px;
+}
+
+.empty-icon{
+    font-size:40px;
+    margin-bottom:8px;
+}
+
+/* ================= TIMETABLE ================= */
+
+.timetable{
+    display:grid;
+    grid-template-columns:
+        repeat(6,minmax(140px,1fr));
+    gap:8px;
+    overflow-x:auto;
+}
+
+.day-column{
+    min-width:140px;
+    background:#f8fafc;
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:8px;
+}
+
+.day-title{
+    text-align:center;
+    font-weight:bold;
+    color:#1e40af;
+    padding:9px;
+}
+
+.lesson{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px;
+    margin-bottom:8px;
+}
+
+.lesson-subject{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.lesson-info{
+    font-size:10px;
+    color:var(--muted);
+    margin-top:5px;
+}
+
+/* ================= CALENDAR ================= */
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(7,1fr);
+    gap:5px;
+}
+
+.calendar-day{
+    min-height:80px;
+    background:#f8fafc;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:7px;
+}
+
+.calendar-day.today{
+    border:2px solid var(--primary);
+}
+
+.calendar-event{
+    background:#dbeafe;
+    color:#1e40af;
+    padding:3px 5px;
+    border-radius:5px;
+    font-size:9px;
+    margin-top:5px;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress{
+    height:9px;
+    background:#e2e8f0;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #60a5fa
+    );
+    border-radius:20px;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-head{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.big-avatar{
+    width:76px;
+    height:76px;
+    border-radius:20px;
+    background:#dbeafe;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark{
+    --bg:#0f172a;
+    --card:#172033;
+    --text:#e5e7eb;
+    --muted:#94a3b8;
+    --border:#293548;
+    --sidebar:#020617;
+}
+
+body.dark .input,
+body.dark select,
+body.dark textarea,
+body.dark th,
+body.dark .day-column,
+body.dark .lesson,
+body.dark .notice,
+body.dark .calendar-day,
+body.dark .quick{
+    background:#111827;
+    color:#e5e7eb;
+}
+
+body.dark th{
+    color:#cbd5e1;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:72px;
+    }
+
+    .sidebar-title,
+    .nav-text,
+    .nav-badge{
+        display:none;
+    }
+
+    .nav-item{
+        justify-content:center;
+        padding:13px 5px;
+    }
+
+    .nav-icon{
+        width:auto;
+        font-size:20px;
+    }
+
+    .main{
+        padding:10px;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .header{
+        padding:0 10px;
+    }
+
+    .header-name{
+        font-size:13px;
+    }
+
+    .header-sub{
+        display:none;
+    }
+
+    .main{
+        padding:8px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .page-head{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .page-title{
+        font-size:20px;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat-number{
+        font-size:22px;
+    }
+
+    .calendar-grid{
+        grid-template-columns:
+            repeat(7,80px);
+        overflow-x:auto;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+LOGIN
+===================================================== -->
+
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-box">
+
+        <div class="login-header">
+
+            <div class="school-logo">
+                🏫
+            </div>
+
+            <h1>
+                سامانه هوشمند مدرسه
+            </h1>
+
+            <p>
+                مدیریت آموزشی و دانش‌آموزی
+            </p>
+
+        </div>
+
+        <div class="login-body">
+
+            <div class="input-group">
+
+                <label>
+                    نام کاربری
+                </label>
+
+                <input
+                    id="loginUser"
+                    class="input"
+                    autocomplete="username"
+                    placeholder="نام کاربری"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    رمز عبور
+                </label>
+
+                <input
+                    id="loginPass"
+                    class="input"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="رمز عبور"
+                >
+
+            </div>
+
+            <button
+                class="login-btn"
+                onclick="login()"
+            >
+                ورود به سامانه
+            </button>
+
+            <div
+                id="loginError"
+                class="login-error"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+APP
+===================================================== -->
+
+<div id="app" class="app hidden">
+
+    <header class="header">
+
+        <div class="header-right">
+
+            <div class="header-avatar">
+                🏫
+            </div>
+
+            <div>
+
+                <div
+                    id="headerName"
+                    class="header-name"
+                >
+                    سامانه مدرسه
+                </div>
+
+                <div
+                    id="headerRole"
+                    class="header-sub"
+                >
+                    سامانه آموزشی
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-left">
+
+            <button
+                class="icon-button"
+                onclick="toggleDark()"
+                title="حالت شب"
+            >
+                🌙
+            </button>
+
+            <button
+                class="icon-button"
+                onclick="home()"
+            >
+                🏠
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                منوی سامانه
+            </div>
+
+            <div id="nav"></div>
+
+        </aside>
+
+
+        <main class="main">
+
+            <div
+                id="page"
+                class="page"
+            ></div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+DATABASE
+===================================================== */
+
+const DB_KEY =
+    "PRO_SCHOOL_SYSTEM_V3";
+
+
+let db =
+    JSON.parse(
+        localStorage.getItem(DB_KEY)
+        ||
+        "null"
+    );
+
+
+if(!db){
+
+    db = {
+
+        managers:[
+            {
+                id:1,
+                name:"محمدصالح",
+                username:"محمدصالح",
+                password:"00001"
+            }
+        ],
+
+        students:[],
+
+        homework:[],
+
+        grades:[],
+
+        attendance:[],
+
+        schedule:[],
+
+        notices:[],
+
+        media:[],
+
+        events:[],
+
+        awards:[],
+
+        subjects:[]
+
+    };
+
+    save();
+
+}
+
+
+let current = null;
+
+
+/* =====================================================
+HELPERS
+===================================================== */
+
+function save(){
+
+    localStorage.setItem(
+        DB_KEY,
+        JSON.stringify(db)
+    );
+
+}
+
+
+function id(){
+
+    return Date.now() +
+        Math.floor(
+            Math.random()*9999
+        );
+
+}
+
+
+function esc(v){
+
+    return String(v ?? "")
+        .replace(/[&<>"']/g,m=>({
+
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+
+        }[m]));
+
+}
+
+
+function usernameExists(u){
+
+    return (
+        db.managers.some(x=>x.username===u)
+        ||
+        db.students.some(x=>x.username===u)
+    );
+
+}
+
+
+function today(){
+
+    return new Date()
+        .toLocaleDateString(
+            "fa-IR"
+        );
+
+}
+
+
+/* =====================================================
+LOGIN
+===================================================== */
+
+function login(){
+
+    const u =
+        document
+        .getElementById("loginUser")
+        .value
+        .trim();
+
+    const p =
+        document
+        .getElementById("loginPass")
+        .value;
+
+    const error =
+        document
+        .getElementById("loginError");
+
+
+    let user =
+        db.managers.find(
+            x =>
+            x.username===u &&
+            x.password===p
+        );
+
+
+    if(user){
+
+        current={
+            ...user,
+            type:"manager"
+        };
+
+        openApp();
+
+        return;
+
+    }
+
+
+    user =
+        db.students.find(
+            x =>
+            x.username===u &&
+            x.password===p
+        );
+
+
+    if(user){
+
+        current={
+            ...user,
+            type:"student"
+        };
+
+        openApp();
+
+        return;
+
+    }
+
+
+    error.textContent =
+        "نام کاربری یا رمز عبور صحیح نیست.";
+
+}
+
+
+document
+.getElementById("loginPass")
+.addEventListener(
+    "keydown",
+    e=>{
+        if(e.key==="Enter"){
+            login();
+        }
+    }
+);
+
+
+/* =====================================================
+OPEN
+===================================================== */
+
+function openApp(){
+
+    document
+    .getElementById("loginScreen")
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById("app")
+    .classList
+    .remove("hidden");
+
+
+    document
+    .getElementById("headerName")
+    .textContent =
+        current.name;
+
+
+    document
+    .getElementById("headerRole")
+    .textContent =
+        current.type==="manager"
+        ?
+        "مدیریت سامانه مدرسه"
+        :
+        "پنل آموزشی دانش‌آموز";
+
+
+    buildNav();
+
+    home();
+
+}
+
+
+/* =====================================================
+NAVIGATION
+===================================================== */
+
+function buildNav(){
+
+    const nav =
+        document.getElementById("nav");
+
+
+    let common = `
+
+        <button
+            class="nav-item"
+            id="n-home"
+            onclick="home()"
+        >
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">داشبورد</span>
+        </button>
+
+    `;
+
+
+    if(current.type==="manager"){
+
+        nav.innerHTML =
+            common +
+
+            `
+
+            <button
+                class="nav-item"
+                id="n-users"
+                onclick="users()"
+            >
+                <span class="nav-icon">👥</span>
+                <span class="nav-text">کاربران</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-homework"
+                onclick="homework()"
+            >
+                <span class="nav-icon">📝</span>
+                <span class="nav-text">تکالیف</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-grades"
+                onclick="grades()"
+            >
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">نمرات و کارنامه</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-attendance"
+                onclick="attendance()"
+            >
+                <span class="nav-icon">✅</span>
+                <span class="nav-text">حضور و غیاب</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-schedule"
+                onclick="schedule()"
+            >
+                <span class="nav-icon">🗓️</span>
+                <span class="nav-text">برنامه هفتگی</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-events"
+                onclick="events()"
+            >
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">رویدادها</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-notices"
+                onclick="notices()"
+            >
+                <span class="nav-icon">📢</span>
+                <span class="nav-text">اطلاعیه‌ها</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-media"
+                onclick="media()"
+            >
+                <span class="nav-icon">📁</span>
+                <span class="nav-text">فایل و ویدیو</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-awards"
+                onclick="awards()"
+            >
+                <span class="nav-icon">🏆</span>
+                <span class="nav-text">افتخارات</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-subjects"
+                onclick="subjects()"
+            >
+                <span class="nav-icon">📚</span>
+                <span class="nav-text">دروس</span>
+            </button>
+
+
+            <button
+                class="nav-item logout"
+                onclick="logout()"
+            >
+                <span class="nav-icon">🚪</span>
+                <span class="nav-text">خروج</span>
+            </button>
+
+            `;
+
+    }else{
+
+        nav.innerHTML =
+            common +
+
+            `
+
+            <button
+                class="nav-item"
+                id="n-profile"
+                onclick="profile()"
+            >
+                <span class="nav-icon">👤</span>
+                <span class="nav-text">پروفایل من</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-homework"
+                onclick="homework()"
+            >
+                <span class="nav-icon">📝</span>
+                <span class="nav-text">تکالیف من</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-grades"
+                onclick="grades()"
+            >
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">کارنامه من</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-attendance"
+                onclick="attendance()"
+            >
+                <span class="nav-icon">✅</span>
+                <span class="nav-text">حضور و غیاب</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-schedule"
+                onclick="schedule()"
+            >
+                <span class="nav-icon">🗓️</span>
+                <span class="nav-text">برنامه هفتگی</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-events"
+                onclick="events()"
+            >
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">رویدادهای مدرسه</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-notices"
+                onclick="notices()"
+            >
+                <span class="nav-icon">📢</span>
+                <span class="nav-text">اطلاعیه‌ها</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-media"
+                onclick="media()"
+            >
+                <span class="nav-icon">📁</span>
+                <span class="nav-text">فایل و ویدیو</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                id="n-awards"
+                onclick="awards()"
+            >
+                <span class="nav-icon">🏆</span>
+                <span class="nav-text">افتخارات من</span>
+            </button>
+
+
+            <button
+                class="nav-item logout"
+                onclick="logout()"
+            >
+                <span class="nav-icon">🚪</span>
+                <span class="nav-text">خروج</span>
+            </button>
+
+            `;
+
+    }
+
+}
+
+
+function active(name){
+
+    document
+    .querySelectorAll(".nav-item")
+    .forEach(
+        x=>x.classList.remove("active")
+    );
+
+
+    const el =
+        document.getElementById(
+            "n-"+name
+        );
+
+    if(el)
+        el.classList.add("active");
+
+}
+
+
+function render(
+    title,
+    subtitle,
+    html,
+    nav
+){
+
+    document
+    .getElementById("page")
+    .innerHTML = `
+
+        <div class="page-head">
+
+            <div>
+
+                <h1 class="page-title">
+                    ${title}
+                </h1>
+
+                <div class="page-subtitle">
+                    ${subtitle}
+                </div>
+
+            </div>
+
+        </div>
+
+        ${html}
+
+    `;
+
+    active(nav);
+
+}
+
+
+/* =====================================================
+DASHBOARD
+===================================================== */
+
+function home(){
+
+    const studentCount =
+        db.students.length;
+
+    const hwCount =
+        current.type==="student"
+        ?
+        db.homework.filter(
+            x =>
+            !x.class ||
+            x.class===current.class
+        ).length
+        :
+        db.homework.length;
+
+
+    const gradeCount =
+        current.type==="student"
+        ?
+        db.grades.filter(
+            x=>x.studentId===current.id
+        ).length
+        :
+        db.grades.length;
+
+
+    const present =
+        current.type==="student"
+        ?
+        db.attendance.filter(
+            x=>
+            x.studentId===current.id &&
+            x.status==="حاضر"
+        ).length
+        :
+        db.attendance.filter(
+            x=>x.status==="حاضر"
+        ).length;
+
+
+    render(
+
+        "داشبورد",
+
+        "نمای کلی سامانه آموزشی مدرسه",
+
+        `
+
+        <div class="welcome">
+
+            <h2>
+                سلام ${esc(current.name)} 👋
+            </h2>
+
+            <p>
+                به سامانه هوشمند مدرسه خوش آمدید.
+                امروز ${today()} است.
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+
+            <div class="card stat stat-blue">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div class="stat-number">
+                    ${
+                        current.type==="manager"
+                        ?
+                        studentCount
+                        :
+                        "—"
+                    }
+                </div>
+
+                <div class="stat-label">
+                    ${
+                        current.type==="manager"
+                        ?
+                        "تعداد دانش‌آموزان"
+                        :
+                        "اطلاعات آموزشی"
+                    }
+                </div>
+
+            </div>
+
+
+            <div class="card stat stat-orange">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <div class="stat-number">
+                    ${hwCount}
+                </div>
+
+                <div class="stat-label">
+                    تکالیف
+                </div>
+
+            </div>
+
+
+            <div class="card stat stat-green">
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+                <div class="stat-number">
+                    ${gradeCount}
+                </div>
+
+                <div class="stat-label">
+                    ${
+                        current.type==="student"
+                        ?
+                        "نمرات من"
+                        :
+                        "نمرات ثبت‌شده"
+                    }
+                </div>
+
+            </div>
+
+
+            <div class="card stat stat-purple">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div class="stat-number">
+                    ${present}
+                </div>
+
+                <div class="stat-label">
+                    حضورهای ثبت‌شده
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="card" style="margin-bottom:20px">
+
+            <h3 class="card-title">
+                دسترسی سریع ⚡
+            </h3>
+
+
+            <div class="quick-grid">
+
+
+                <div
+                    class="quick"
+                    onclick="homework()"
+                >
+                    <div class="quick-icon">
+                        📝
+                    </div>
+
+                    <div class="quick-title">
+                        تکالیف
+                    </div>
+                </div>
+
+
+                <div
+                    class="quick"
+                    onclick="grades()"
+                >
+                    <div class="quick-icon">
+                        📊
+                    </div>
+
+                    <div class="quick-title">
+                        کارنامه
+                    </div>
+                </div>
+
+
+                <div
+                    class="quick"
+                    onclick="schedule()"
+                >
+                    <div class="quick-icon">
+                        🗓️
+                    </div>
+
+                    <div class="quick-title">
+                        برنامه هفتگی
+                    </div>
+                </div>
+
+
+                <div
+                    class="quick"
+                    onclick="media()"
+                >
+                    <div class="quick-icon">
+                        🎥
+                    </div>
+
+                    <div class="quick-title">
+                        فایل و ویدیو
+                    </div>
+                </div>
+
+
+                <div
+                    class="quick"
+                    onclick="events()"
+                >
+                    <div class="quick-icon">
+                        📅
+                    </div>
+
+                    <div class="quick-title">
+                        رویدادها
+                    </div>
+                </div>
+
+
+                <div
+                    class="quick"
+                    onclick="notices()"
+                >
+                    <div class="quick-icon">
+                        📢
+                    </div>
+
+                    <div class="quick-title">
+                        اطلاعیه‌ها
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="grid">
+
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    📢 آخرین اطلاعیه‌ها
+                </h3>
+
+                ${
+                    db.notices.length
+
+                    ?
+
+                    db.notices
+                    .slice()
+                    .reverse()
+                    .slice(0,4)
+                    .map(
+                        n=>`
+
+                        <div class="notice">
+
+                            <div class="notice-title">
+                                ${esc(n.title)}
+                            </div>
+
+                            <div class="notice-text">
+                                ${esc(n.body)}
+                            </div>
+
+                        </div>
+
+                        `
+                    )
+                    .join("")
+
+                    :
+
+                    `
+                    <div class="empty">
+                        <div class="empty-icon">
+                            📭
+                        </div>
+
+                        اطلاعیه‌ای وجود ندارد.
+                    </div>
+                    `
+
+                }
+
+            </div>
+
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    🏆 افتخارات اخیر
+                </h3>
+
+
+                ${
+                    db.awards.length
+
+                    ?
+
+                    db.awards
+                    .slice()
+                    .reverse()
+                    .slice(0,4)
+                    .map(
+                        a=>`
+
+                        <div class="notice">
+
+                            <div class="notice-title">
+                                🏆
+                                ${esc(a.title)}
+                            </div>
+
+                            <div class="notice-text">
+                                ${esc(a.description)}
+                            </div>
+
+                        </div>
+
+                        `
+                    )
+                    .join("")
+
+                    :
+
+                    `
+                    <div class="empty">
+                        هنوز افتخاری ثبت نشده است.
+                    </div>
+                    `
+
+                }
+
+            </div>
+
+
+        </div>
+
+        `,
+
+        "home"
+
+    );
+
+}
+
+
+/* =====================================================
+USERS
+===================================================== */
+
+function users(){
+
+    if(current.type!=="manager")
+        return;
+
+
+    const list = [
+
+        ...db.managers.map(
+            x=>({
+                ...x,
+                role:"مدیر"
+            })
+        ),
+
+        ...db.students.map(
+            x=>({
+                ...x,
+                role:"دانش‌آموز"
+            })
+        )
+
+    ];
+
+
+    render(
+
+        "مدیریت کاربران",
+
+        "افزودن و مدیریت مدیران و دانش‌آموزان",
+
+        `
+
+        <div class="grid">
+
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    👨‍💼 افزودن مدیر
+                </h3>
+
+
+                <div class="field">
+
+                    <label>
+                        نام
+                    </label>
+
+                    <input
+                        id="mName"
+                        class="input"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        نام کاربری
+                    </label>
+
+                    <input
+                        id="mUser"
+                        class="input"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        رمز عبور
+                    </label>
+
+                    <input
+                        id="mPass"
+                        class="input"
+                    >
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="addManager()"
+                >
+                    افزودن مدیر
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    👨‍🎓 افزودن دانش‌آموز
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            نام
+                        </label>
+
+                        <input
+                            id="sName"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            کلاس
+                        </label>
+
+                        <input
+                            id="sClass"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            نام کاربری
+                        </label>
+
+                        <input
+                            id="sUser"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            رمز عبور
+                        </label>
+
+                        <input
+                            id="sPass"
+                            class="input"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn green"
+                    onclick="addStudent()"
+                >
+                    افزودن دانش‌آموز
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+        <br>
+
+
+        <div class="card">
+
+            <h3 class="card-title">
+                فهرست کاربران
+            </h3>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <tr>
+
+                        <th>
+                            نام
+                        </th>
+
+                        <th>
+                            نام کاربری
+                        </th>
+
+                        <th>
+                            نقش
+                        </th>
+
+                        <th>
+                            کلاس
+                        </th>
+
+                        <th>
+                            عملیات
+                        </th>
+
+                    </tr>
+
+
+                    ${
+                        list.map(
+                            x=>`
+
+                            <tr>
+
+                                <td>
+                                    ${esc(x.name)}
+                                </td>
+
+                                <td>
+                                    ${esc(x.username)}
+                                </td>
+
+                                <td>
+
+                                    <span class="badge ${
+                                        x.role==="مدیر"
+                                        ?
+                                        "purple"
+                                        :
+                                        "blue"
+                                    }">
+
+                                        ${x.role}
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+                                    ${esc(x.class||"—")}
+                                </td>
+
+                                <td>
+
+                                    ${
+                                        x.id!==current.id
+                                        ?
+                                        `
+                                        <button
+                                            class="btn red"
+                                            onclick="deleteUser(${x.id},'${x.role}')"
+                                        >
+                                            حذف
+                                        </button>
+                                        `
+                                        :
+                                        `
+                                        <span class="badge green">
+                                            حساب فعلی
+                                        </span>
+                                        `
+                                    }
+
+                                </td>
+
+                            </tr>
+
+                            `
+                        ).join("")
+
+                    }
+
+                </table>
+
+            </div>
+
+        </div>
+
+        `,
+
+        "users"
+
+    );
+
+}
+
+
+function addManager(){
+
+    const name =
+        document.getElementById("mName").value.trim();
+
+    const username =
+        document.getElementById("mUser").value.trim();
+
+    const password =
+        document.getElementById("mPass").value;
+
+
+    if(!name||!username||!password)
+        return alert("اطلاعات را کامل وارد کن.");
+
+
+    if(usernameExists(username))
+        return alert("این نام کاربری قبلاً استفاده شده.");
+
+
+    db.managers.push({
+        id:id(),
+        name,
+        username,
+        password
+    });
+
+
+    save();
+
+    alert("مدیر اضافه شد.");
+
+    users();
+
+}
+
+
+function addStudent(){
+
+    const name =
+        document.getElementById("sName").value.trim();
+
+    const cls =
+        document.getElementById("sClass").value.trim();
+
+    const username =
+        document.getElementById("sUser").value.trim();
+
+    const password =
+        document.getElementById("sPass").value;
+
+
+    if(!name||!username||!password)
+        return alert("اطلاعات را کامل وارد کن.");
+
+
+    if(usernameExists(username))
+        return alert("این نام کاربری قبلاً استفاده شده.");
+
+
+    db.students.push({
+        id:id(),
+        name,
+        class:cls,
+        username,
+        password
+    });
+
+
+    save();
+
+    alert("دانش‌آموز اضافه شد.");
+
+    users();
+
+}
+
+
+function deleteUser(userId,role){
+
+    if(!confirm("این حساب حذف شود؟"))
+        return;
+
+
+    if(role==="مدیر"){
+
+        if(db.managers.length<=1)
+            return alert(
+                "حداقل یک مدیر باید باقی بماند."
+            );
+
+
+        db.managers =
+            db.managers.filter(
+                x=>x.id!==userId
+            );
+
+    }else{
+
+        db.students =
+            db.students.filter(
+                x=>x.id!==userId
+            );
+
+        db.grades =
+            db.grades.filter(
+                x=>x.studentId!==userId
+            );
+
+        db.attendance =
+            db.attendance.filter(
+                x=>x.studentId!==userId
+            );
+
+    }
+
+
+    save();
+
+    users();
+
+}
+
+
+/* =====================================================
+HOMEWORK
+===================================================== */
+
+function homework(){
+
+    const list =
+        db.homework
+        .filter(
+            x =>
+            current.type==="manager"
+            ||
+            !x.class
+            ||
+            x.class===current.class
+        )
+        .slice()
+        .reverse();
+
+
+    render(
+
+        "تکالیف",
+
+        "مدیریت و مشاهده تکالیف آموزشی",
+
+        `
+
+        ${
+            current.type==="manager"
+            ?
+            `
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    ➕ ثبت تکلیف
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            عنوان
+                        </label>
+
+                        <input
+                            id="hwTitle"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            تاریخ تحویل
+                        </label>
+
+                        <input
+                            id="hwDate"
+                            type="date"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            کلاس
+                        </label>
+
+                        <input
+                            id="hwClass"
+                            class="input"
+                            placeholder="مثلاً هفتم الف"
+                        >
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label>
+                            توضیحات
+                        </label>
+
+                        <textarea
+                            id="hwDesc"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="addHomework()"
+                >
+                    ثبت تکلیف
+                </button>
+
+            </div>
+
+            <br>
+
+            `
+            :
+            ""
+        }
+
+
+        <div class="grid">
+
+
+            ${
+                list.length
+
+                ?
+
+                list.map(
+                    h=>`
+
+                    <div class="card">
+
+                        <span class="badge orange">
+                            📝 تکلیف
+                        </span>
+
+                        <h3>
+                            ${esc(h.title)}
+                        </h3>
+
+                        <p>
+                            ${esc(h.description)}
+                        </p>
+
+                        <p>
+                            📅
+                            ${esc(h.date||"بدون تاریخ")}
+                        </p>
+
+                        <p>
+                            🏫
+                            ${esc(h.class||"همه کلاس‌ها")}
+                        </p>
+
+
+                        ${
+                            current.type==="manager"
+                            ?
+                            `
+                            <button
+                                class="btn red"
+                                onclick="remove('homework',${h.id},homework)"
+                            >
+                                حذف
+                            </button>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                    `
+                ).join("")
+
+                :
+
+                `
+                <div class="card empty">
+                    <div class="empty-icon">
+                        📝
+                    </div>
+                    تکلیفی وجود ندارد.
+                </div>
+                `
+            }
+
+        </div>
+
+        `,
+
+        "homework"
+
+    );
+
+}
+
+
+function addHomework(){
+
+    const title =
+        document.getElementById("hwTitle").value.trim();
+
+    const date =
+        document.getElementById("hwDate").value;
+
+    const cls =
+        document.getElementById("hwClass").value.trim();
+
+    const description =
+        document.getElementById("hwDesc").value.trim();
+
+
+    if(!title)
+        return alert("عنوان تکلیف را وارد کن.");
+
+
+    db.homework.push({
+        id:id(),
+        title,
+        date,
+        class:cls,
+        description
+    });
+
+
+    save();
+
+    homework();
+
+}
+
+
+/* =====================================================
+GRADES
+===================================================== */
+
+function grades(){
+
+    const list =
+        current.type==="student"
+        ?
+        db.grades.filter(
+            x=>x.studentId===current.id
+        )
+        :
+        db.grades;
+
+
+    const average =
+        list.length
+        ?
+        (
+            list.reduce(
+                (a,b)=>a+Number(b.score),
+                0
+            ) / list.length
+        ).toFixed(2)
+        :
+        "—";
+
+
+    const options =
+        db.students.map(
+            s=>`
+
+            <option value="${s.id}">
+                ${esc(s.name)}
+                -
+                ${esc(s.class||"")}
+            </option>
+
+            `
+        ).join("");
+
+
+    render(
+
+        current.type==="manager"
+        ?
+        "نمرات و کارنامه"
+        :
+        "کارنامه من",
+
+        "ثبت نمره، میانگین و سوابق درسی",
+
+        `
+
+        <div class="stats">
+
+
+            <div class="card stat">
+
+                <div class="stat-icon">
+                    📚
+                </div>
+
+                <div class="stat-number">
+                    ${list.length}
+                </div>
+
+                <div class="stat-label">
+                    تعداد نمرات
+                </div>
+
+            </div>
+
+
+            <div class="card stat">
+
+                <div class="stat-icon">
+                    ⭐
+                </div>
+
+                <div class="stat-number">
+                    ${average}
+                </div>
+
+                <div class="stat-label">
+                    میانگین
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        ${
+            current.type==="manager"
+            ?
+            `
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    ➕ ثبت نمره
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            دانش‌آموز
+                        </label>
+
+                        <select id="gradeStudent">
+
+                            ${options}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            درس
+                        </label>
+
+                        <input
+                            id="gradeSubject"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            نمره
+                        </label>
+
+                        <input
+                            id="gradeScore"
+                            class="input"
+                            type="number"
+                            min="0"
+                            max="20"
+                            step=".25"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            توضیح
+                        </label>
+
+                        <input
+                            id="gradeDesc"
+                            class="input"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="addGrade()"
+                >
+                    ثبت نمره
+                </button>
+
+            </div>
+
+            <br>
+
+            `
+            :
+            ""
+        }
+
+
+        <div class="card">
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <tr>
+
+                        ${
+                            current.type==="manager"
+                            ?
+                            "<th>دانش‌آموز</th>"
+                            :
+                            ""
+                        }
+
+                        <th>
+                            درس
+                        </th>
+
+                        <th>
+                            نمره
+                        </th>
+
+                        <th>
+                            توضیح
+                        </th>
+
+                        <th>
+                            عملیات
+                        </th>
+
+                    </tr>
+
+
+                    ${
+                        list.length
+
+                        ?
+
+                        list.map(
+                            g=>{
+
+                                const s =
+                                    db.students.find(
+                                        x=>x.id===g.studentId
+                                    );
+
+                                return `
+
+                                <tr>
+
+                                    ${
+                                        current.type==="manager"
+                                        ?
+                                        `
+                                        <td>
+                                            ${esc(s?.name||"—")}
+                                        </td>
+                                        `
+                                        :
+                                        ""
+                                    }
+
+                                    <td>
+                                        ${esc(g.subject)}
+                                    </td>
+
+                                    <td>
+
+                                        <span class="badge ${
+                                            Number(g.score)>=10
+                                            ?
+                                            "green"
+                                            :
+                                            "red"
+                                        }">
+
+                                            ${esc(g.score)}
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        ${esc(g.description||"—")}
+                                    </td>
+
+                                    <td>
+
+                                        ${
+                                            current.type==="manager"
+                                            ?
+                                            `
+                                            <button
+                                                class="btn red"
+                                                onclick="remove('grades',${g.id},grades)"
+                                            >
+                                                حذف
+                                            </button>
+                                            `
+                                            :
+                                            "—"
+                                        }
+
+                                    </td>
+
+                                </tr>
+
+                                `;
+
+                            }
+                        ).join("")
+
+                        :
+
+                        `
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="empty"
+                            >
+                                نمره‌ای ثبت نشده است.
+                            </td>
+
+                        </tr>
+                        `
+                    }
+
+                </table>
+
+            </div>
+
+        </div>
+
+        `,
+
+        "grades"
+
+    );
+
+}
+
+
+function addGrade(){
+
+    const studentId =
+        Number(
+            document.getElementById("gradeStudent").value
+        );
+
+    const subject =
+        document.getElementById("gradeSubject").value.trim();
+
+    const score =
+        document.getElementById("gradeScore").value;
+
+    const desc =
+        document.getElementById("gradeDesc").value.trim();
+
+
+    if(!studentId||!subject||score==="")
+        return alert("اطلاعات را کامل کن.");
+
+
+    db.grades.push({
+        id:id(),
+        studentId,
+        subject,
+        score,
+        description:desc
+    });
+
+
+    save();
+
+    grades();
+
+}
+
+
+/* =====================================================
+ATTENDANCE
+===================================================== */
+
+function attendance(){
+
+    if(current.type==="student"){
+
+        const list =
+            db.attendance.filter(
+                x=>x.studentId===current.id
+            );
+
+
+        const present =
+            list.filter(
+                x=>x.status==="حاضر"
+            ).length;
+
+        const absent =
+            list.filter(
+                x=>x.status==="غایب"
+            ).length;
+
+        const late =
+            list.filter(
+                x=>x.status==="تاخیر"
+            ).length;
+
+
+        render(
+
+            "حضور و غیاب من",
+
+            "سوابق حضور، غیبت و تأخیر",
+
+            `
+
+            <div class="stats">
+
+                <div class="card stat">
+
+                    <div class="stat-icon">
+                        🟢
+                    </div>
+
+                    <div class="stat-number">
+                        ${present}
+                    </div>
+
+                    <div class="stat-label">
+                        حاضر
+                    </div>
+
+                </div>
+
+
+                <div class="card stat">
+
+                    <div class="stat-icon">
+                        🔴
+                    </div>
+
+                    <div class="stat-number">
+                        ${absent}
+                    </div>
+
+                    <div class="stat-label">
+                        غایب
+                    </div>
+
+                </div>
+
+
+                <div class="card stat">
+
+                    <div class="stat-icon">
+                        🟠
+                    </div>
+
+                    <div class="stat-number">
+                        ${late}
+                    </div>
+
+                    <div class="stat-label">
+                        تأخیر
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <tr>
+
+                            <th>
+                                تاریخ
+                            </th>
+
+                            <th>
+                                وضعیت
+                            </th>
+
+                            <th>
+                                توضیح
+                            </th>
+
+                        </tr>
+
+
+                        ${
+                            list.length
+                            ?
+                            list
+                            .slice()
+                            .reverse()
+                            .map(
+                                x=>`
+
+                                <tr>
+
+                                    <td>
+                                        ${esc(x.date)}
+                                    </td>
+
+                                    <td>
+                                        ${esc(x.status)}
+                                    </td>
+
+                                    <td>
+                                        ${esc(x.note||"—")}
+                                    </td>
+
+                                </tr>
+
+                                `
+                            ).join("")
+
+                            :
+
+                            `
+                            <tr>
+
+                                <td
+                                    colspan="3"
+                                    class="empty"
+                                >
+                                    سابقه‌ای وجود ندارد.
+                                </td>
+
+                            </tr>
+                            `
+                        }
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            `,
+
+            "attendance"
+
+        );
+
+        return;
+
+    }
+
+
+    render(
+
+        "حضور و غیاب",
+
+        "ثبت حضور، غیبت و تأخیر دانش‌آموزان",
+
+        `
+
+        <div class="card">
+
+            <h3 class="card-title">
+                ثبت وضعیت امروز
+            </h3>
+
+
+            <div class="form-grid">
+
+                <div class="field">
+
+                    <label>
+                        دانش‌آموز
+                    </label>
+
+                    <select id="attStudent">
+
+                        ${
+                            db.students.map(
+                                s=>`
+
+                                <option value="${s.id}">
+                                    ${esc(s.name)}
+                                    -
+                                    ${esc(s.class||"")}
+                                </option>
+
+                                `
+                            ).join("")
+                        }
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        وضعیت
+                    </label>
+
+                    <select id="attStatus">
+
+                        <option>
+                            حاضر
+                        </option>
+
+                        <option>
+                            غایب
+                        </option>
+
+                        <option>
+                            تاخیر
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>
+                        توضیح
+                    </label>
+
+                    <input
+                        id="attNote"
+                        class="input"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="addAttendance()"
+            >
+                ثبت وضعیت
+            </button>
+
+        </div>
+
+
+        <br>
+
+
+        <div class="card">
+
+            <h3 class="card-title">
+                آخرین سوابق
+            </h3>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <tr>
+
+                        <th>
+                            دانش‌آموز
+                        </th>
+
+                        <th>
+                            تاریخ
+                        </th>
+
+                        <th>
+                            وضعیت
+                        </th>
+
+                        <th>
+                            عملیات
+                        </th>
+
+                    </tr>
+
+
+                    ${
+                        db.attendance
+                        .slice()
+                        .reverse()
+                        .slice(0,30)
+                        .map(
+                            x=>{
+
+                                const s =
+                                    db.students.find(
+                                        a=>a.id===x.studentId
+                                    );
+
+                                return `
+
+                                <tr>
+
+                                    <td>
+                                        ${esc(s?.name||"—")}
+                                    </td>
+
+                                    <td>
+                                        ${esc(x.date)}
+                                    </td>
+
+                                    <td>
+                                        <span class="badge ${
+                                            x.status==="حاضر"
+                                            ?
+                                            "green"
+                                            :
+                                            x.status==="غایب"
+                                            ?
+                                            "red"
+                                            :
+                                            "orange"
+                                        }">
+
+                                            ${esc(x.status)}
+
+                                        </span>
+                                    </td>
+
+                                    <td>
+
+                                        <button
+                                            class="btn red"
+                                            onclick="remove('attendance',${x.id},attendance)"
+                                        >
+                                            حذف
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                                `;
+
+                            }
+                        ).join("")
+
+                        ||
+
+                        `
+                        <tr>
+                            <td
+                                colspan="4"
+                                class="empty"
+                            >
+                                هنوز سابقه‌ای ثبت نشده است.
+                            </td>
+                        </tr>
+                        `
+                    }
+
+                </table>
+
+            </div>
+
+        </div>
+
+        `,
+
+        "attendance"
+
+    );
+
+}
+
+
+function addAttendance(){
+
+    const studentId =
+        Number(
+            document.getElementById("attStudent").value
+        );
+
+    const status =
+        document.getElementById("attStatus").value;
+
+    const note =
+        document.getElementById("attNote").value.trim();
+
+
+    db.attendance.push({
+
+        id:id(),
+
+        studentId,
+
+        status,
+
+        note,
+
+        date:today()
+
+    });
+
+
+    save();
+
+    attendance();
+
+}
+
+
+/* =====================================================
+SCHEDULE
+===================================================== */
+
+function schedule(){
+
+    const days=[
+        "شنبه",
+        "یکشنبه",
+        "دوشنبه",
+        "سه‌شنبه",
+        "چهارشنبه",
+        "پنجشنبه"
+    ];
+
+
+    render(
+
+        "برنامه هفتگی",
+
+        "برنامه کلاس‌ها و درس‌های مدرسه",
+
+        `
+
+        ${
+            current.type==="manager"
+            ?
+            `
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    ➕ افزودن کلاس
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            روز
+                        </label>
+
+                        <select id="schDay">
+
+                            ${
+                                days.map(
+                                    d=>
+                                    `<option>${d}</option>`
+                                ).join("")
+                            }
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            زنگ
+                        </label>
+
+                        <input
+                            id="schPeriod"
+                            class="input"
+                            placeholder="زنگ اول"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            درس
+                        </label>
+
+                        <input
+                            id="schSubject"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            معلم
+                        </label>
+
+                        <input
+                            id="schTeacher"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            کلاس
+                        </label>
+
+                        <input
+                            id="schClass"
+                            class="input"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="addSchedule()"
+                >
+                    افزودن به برنامه
+                </button>
+
+            </div>
+
+            <br>
+
+            `
+            :
+            ""
+        }
+
+
+        <div class="timetable">
+
+            ${
+                days.map(
+                    day=>`
+
+                    <div class="day-column">
+
+                        <div class="day-title">
+                            ${day}
+                        </div>
+
+
+                        ${
+                            db.schedule
+                            .filter(
+                                x=>
+                                x.day===day &&
+                                (
+                                    current.type==="manager"
+                                    ||
+                                    !x.class ||
+                                    x.class===current.class
+                                )
+                            )
+                            .map(
+                                x=>`
+
+                                <div class="lesson">
+
+                                    <div class="lesson-subject">
+                                        ${esc(x.subject)}
+                                    </div>
+
+                                    <div class="lesson-info">
+                                        🕐 ${esc(x.period)}
+                                    </div>
+
+                                    <div class="lesson-info">
+                                        👨‍🏫 ${esc(x.teacher||"—")}
+                                    </div>
+
+                                    ${
+                                        current.type==="manager"
+                                        ?
+                                        `
+                                        <br>
+
+                                        <button
+                                            class="btn red"
+                                            style="padding:5px 8px"
+                                            onclick="remove('schedule',${x.id},schedule)"
+                                        >
+                                            حذف
+                                        </button>
+                                        `
+                                        :
+                                        ""
+                                    }
+
+                                </div>
+
+                                `
+                            ).join("")
+
+                            ||
+
+                            `
+                            <div
+                                style="
+                                text-align:center;
+                                color:#94a3b8;
+                                padding:20px 5px;
+                                font-size:11px;
+                                "
+                            >
+                                کلاسی ثبت نشده
+                            </div>
+                            `
+                        }
+
+                    </div>
+
+                    `
+                ).join("")
+            }
+
+        </div>
+
+        `,
+
+        "schedule"
+
+    );
+
+}
+
+
+function addSchedule(){
+
+    const day =
+        document.getElementById("schDay").value;
+
+    const period =
+        document.getElementById("schPeriod").value.trim();
+
+    const subject =
+        document.getElementById("schSubject").value.trim();
+
+    const teacher =
+        document.getElementById("schTeacher").value.trim();
+
+    const cls =
+        document.getElementById("schClass").value.trim();
+
+
+    if(!period||!subject)
+        return alert("زنگ و درس را وارد کن.");
+
+
+    db.schedule.push({
+        id:id(),
+        day,
+        period,
+        subject,
+        teacher,
+        class:cls
+    });
+
+
+    save();
+
+    schedule();
+
+}
+
+
+/* =====================================================
+EVENTS
+===================================================== */
+
+function events(){
+
+    render(
+
+        "رویدادهای مدرسه",
+
+        "جشن‌ها، امتحانات، اردوها و برنامه‌های ویژه",
+
+        `
+
+        ${
+            current.type==="manager"
+            ?
+            `
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    ➕ ثبت رویداد
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            عنوان
+                        </label>
+
+                        <input
+                            id="eventTitle"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            تاریخ
+                        </label>
+
+                        <input
+                            id="eventDate"
+                            type="date"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            نوع
+                        </label>
+
+                        <select id="eventType">
+
+                            <option>
+                                امتحان
+                            </option>
+
+                            <option>
+                                اردو
+                            </option>
+
+                            <option>
+                                جشن
+                            </option>
+
+                            <option>
+                                جلسه
+                            </option>
+
+                            <option>
+                                مسابقه
+                            </option>
+
+                            <option>
+                                سایر
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            مکان
+                        </label>
+
+                        <input
+                            id="eventPlace"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label>
+                            توضیحات
+                        </label>
+
+                        <textarea
+                            id="eventDesc"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="addEvent()"
+                >
+                    ثبت رویداد
+                </button>
+
+            </div>
+
+            <br>
+
+            `
+            :
+            ""
+        }
+
+
+        <div class="grid">
+
+
+            ${
+                db.events
+                .slice()
+                .reverse()
+                .map(
+                    e=>`
+
+                    <div class="card">
+
+                        <span class="badge purple">
+                            📅 ${esc(e.type)}
+                        </span>
+
+                        <h3>
+                            ${esc(e.title)}
+                        </h3>
+
+                        <p>
+                            📆 ${esc(e.date||"—")}
+                        </p>
+
+                        <p>
+                            📍 ${esc(e.place||"—")}
+                        </p>
+
+                        <p>
+                            ${esc(e.description||"")}
+                        </p>
+
+
+                        ${
+                            current.type==="manager"
+                            ?
+                            `
+                            <button
+                                class="btn red"
+                                onclick="remove('events',${e.id},events)"
+                            >
+                                حذف
+                            </button>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                    `
+                ).join("")
+
+                ||
+
+                `
+                <div class="card empty">
+                    رویدادی ثبت نشده است.
+                </div>
+                `
+            }
+
+        </div>
+
+        `,
+
+        "events"
+
+    );
+
+}
+
+
+function addEvent(){
+
+    const title =
+        document.getElementById("eventTitle").value.trim();
+
+    const date =
+        document.getElementById("eventDate").value;
+
+    const type =
+        document.getElementById("eventType").value;
+
+    const place =
+        document.getElementById("eventPlace").value.trim();
+
+    const description =
+        document.getElementById("eventDesc").value.trim();
+
+
+    if(!title)
+        return alert("عنوان رویداد را وارد کن.");
+
+
+    db.events.push({
+        id:id(),
+        title,
+        date,
+        type,
+        place,
+        description
+    });
+
+
+    save();
+
+    events();
+
+}
+
+
+/* =====================================================
+NOTICES
+===================================================== */
+
+function notices(){
+
+    render(
+
+        "اطلاعیه‌ها",
+
+        "اخبار و پیام‌های مهم مدرسه",
+
+        `
+
+        ${
+            current.type==="manager"
+            ?
+            `
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    📢 اطلاعیه جدید
+                </h3>
+
+
+                <div class="field">
+
+                    <label>
+                        عنوان
+                    </label>
+
+                    <input
+                        id="noticeTitle"
+                        class="input"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        متن اطلاعیه
+                    </label>
+
+                    <textarea
+                        id="noticeBody"
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="addNotice()"
+                >
+                    انتشار اطلاعیه
+                </button>
+
+            </div>
+
+            <br>
+
+            `
+            :
+            ""
+        }
+
+
+        ${
+            db.notices.length
+
+            ?
+
+            db.notices
+            .slice()
+            .reverse()
+            .map(
+                n=>`
+
+                <div class="card" style="margin-bottom:12px">
+
+                    <span class="badge blue">
+                        📢 اطلاعیه
+                    </span>
+
+                    <h3>
+                        ${esc(n.title)}
+                    </h3>
+
+                    <p style="line-height:2">
+                        ${esc(n.body)}
+                    </p>
+
+
+                    ${
+                        current.type==="manager"
+                        ?
+                        `
+                        <button
+                            class="btn red"
+                            onclick="remove('notices',${n.id},notices)"
+                        >
+                            حذف
+                        </button>
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+
+                `
+            ).join("")
+
+            :
+
+            `
+            <div class="card empty">
+                <div class="empty-icon">
+                    📢
+                </div>
+                اطلاعیه‌ای وجود ندارد.
+            </div>
+            `
+
+        }
+
+        `,
+
+        "notices"
+
+    );
+
+}
+
+
+function addNotice(){
+
+    const title =
+        document.getElementById("noticeTitle").value.trim();
+
+    const body =
+        document.getElementById("noticeBody").value.trim();
+
+
+    if(!title)
+        return alert("عنوان را وارد کن.");
+
+
+    db.notices.push({
+        id:id(),
+        title,
+        body
+    });
+
+
+    save();
+
+    notices();
+
+}
+
+
+/* =====================================================
+MEDIA
+===================================================== */
+
+function media(){
+
+    render(
+
+        "فایل و ویدیو",
+
+        "منابع آموزشی و فایل‌های مدرسه",
+
+        `
+
+        ${
+            current.type==="manager"
+            ?
+            `
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    📁 افزودن فایل یا ویدیو
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            عنوان
+                        </label>
+
+                        <input
+                            id="mediaTitle"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            نوع
+                        </label>
+
+                        <select id="mediaType">
+
+                            <option value="file">
+                                📁 فایل
+                            </option>
+
+                            <option value="video">
+                                🎥 ویدیو
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label>
+                            لینک فایل / ویدیو
+                        </label>
+
+                        <input
+                            id="mediaUrl"
+                            class="input"
+                            placeholder="https://..."
+                        >
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label>
+                            توضیحات
+                        </label>
+
+                        <textarea
+                            id="mediaDesc"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="addMedia()"
+                >
+                    ثبت
+                </button>
+
+                <p
+                    style="
+                    color:#64748b;
+                    font-size:11px
+                    "
+                >
+                    در این نسخه لینک فایل یا ویدیو ذخیره می‌شود.
+                    آپلود واقعی فایل را می‌توانیم در نسخه آنلاین
+                    به فضای ذخیره‌سازی وصل کنیم.
+                </p>
+
+            </div>
+
+            <br>
+
+            `
+            :
+            ""
+        }
+
+
+        <div class="grid">
+
+
+            ${
+                db.media.length
+
+                ?
+
+                db.media
+                .slice()
+                .reverse()
+                .map(
+                    m=>`
+
+                    <div class="card">
+
+                        <span class="badge ${
+                            m.type==="video"
+                            ?
+                            "purple"
+                            :
+                            "blue"
+                        }">
+
+                            ${
+                                m.type==="video"
+                                ?
+                                "🎥 ویدیو"
+                                :
+                                "📁 فایل"
+                            }
+
+                        </span>
+
+                        <h3>
+                            ${esc(m.title)}
+                        </h3>
+
+                        <p>
+                            ${esc(m.description||"")}
+                        </p>
+
+
+                        <div class="actions">
+
+                            <a
+                                href="${esc(m.url)}"
+                                target="_blank"
+                                rel="noopener"
+                            >
+
+                                <button class="btn">
+                                    باز کردن
+                                </button>
+
+                            </a>
+
+
+                            ${
+                                current.type==="manager"
+                                ?
+                                `
+                                <button
+                                    class="btn red"
+                                    onclick="remove('media',${m.id},media)"
+                                >
+                                    حذف
+                                </button>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                    </div>
+
+                    `
+                ).join("")
+
+                :
+
+                `
+                <div class="card empty">
+                    <div class="empty-icon">
+                        📁
+                    </div>
+                    هنوز فایلی اضافه نشده است.
+                </div>
+                `
+
+            }
+
+        </div>
+
+        `,
+
+        "media"
+
+    );
+
+}
+
+
+function addMedia(){
+
+    const title =
+        document.getElementById("mediaTitle").value.trim();
+
+    const type =
+        document.getElementById("mediaType").value;
+
+    const url =
+        document.getElementById("mediaUrl").value.trim();
+
+    const description =
+        document.getElementById("mediaDesc").value.trim();
+
+
+    if(!title||!url)
+        return alert("عنوان و لینک را وارد کن.");
+
+
+    db.media.push({
+        id:id(),
+        title,
+        type,
+        url,
+        description
+    });
+
+
+    save();
+
+    media();
+
+}
+
+
+/* =====================================================
+AWARDS
+===================================================== */
+
+function awards(){
+
+    const list =
+        current.type==="student"
+        ?
+        db.awards.filter(
+            x=>x.studentId===current.id
+        )
+        :
+        db.awards;
+
+
+    render(
+
+        current.type==="manager"
+        ?
+        "افتخارات دانش‌آموزان"
+        :
+        "افتخارات من",
+
+        "ثبت و نمایش موفقیت‌های آموزشی و فرهنگی",
+
+        `
+
+        ${
+            current.type==="manager"
+            ?
+            `
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    🏆 ثبت افتخار
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            دانش‌آموز
+                        </label>
+
+                        <select id="awardStudent">
+
+                            ${
+                                db.students.map(
+                                    s=>`
+
+                                    <option value="${s.id}">
+                                        ${esc(s.name)}
+                                    </option>
+
+                                    `
+                                ).join("")
+                            }
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            عنوان
+                        </label>
+
+                        <input
+                            id="awardTitle"
+                            class="input"
+                            placeholder="مثلاً رتبه اول مسابقات"
+                        >
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label>
+                            توضیحات
+                        </label>
+
+                        <textarea
+                            id="awardDesc"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn orange"
+                    onclick="addAward()"
+                >
+                    ثبت افتخار 🏆
+                </button>
+
+            </div>
+
+            <br>
+
+            `
+            :
+            ""
+        }
+
+
+        <div class="grid">
+
+
+            ${
+                list.length
+
+                ?
+
+                list
+                .slice()
+                .reverse()
+                .map(
+                    a=>{
+
+                        const s =
+                            db.students.find(
+                                x=>x.id===a.studentId
+                            );
+
+                        return `
+
+                        <div class="card">
+
+                            <div
+                                style="
+                                font-size:40px;
+                                "
+                            >
+                                🏆
+                            </div>
+
+                            <h3>
+                                ${esc(a.title)}
+                            </h3>
+
+                            ${
+                                current.type==="manager"
+                                ?
+                                `
+                                <span class="badge purple">
+                                    ${esc(s?.name||"—")}
+                                </span>
+                                `
+                                :
+                                ""
+                            }
+
+                            <p>
+                                ${esc(a.description||"")}
+                            </p>
+
+
+                            ${
+                                current.type==="manager"
+                                ?
+                                `
+                                <button
+                                    class="btn red"
+                                    onclick="remove('awards',${a.id},awards)"
+                                >
+                                    حذف
+                                </button>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                        `;
+
+                    }
+                ).join("")
+
+                :
+
+                `
+                <div class="card empty">
+                    <div class="empty-icon">
+                        🏆
+                    </div>
+                    هنوز افتخاری ثبت نشده است.
+                </div>
+                `
+
+            }
+
+        </div>
+
+        `,
+
+        "awards"
+
+    );
+
+}
+
+
+function addAward(){
+
+    const studentId =
+        Number(
+            document.getElementById("awardStudent").value
+        );
+
+    const title =
+        document.getElementById("awardTitle").value.trim();
+
+    const description =
+        document.getElementById("awardDesc").value.trim();
+
+
+    if(!studentId||!title)
+        return alert("اطلاعات را کامل کن.");
+
+
+    db.awards.push({
+        id:id(),
+        studentId,
+        title,
+        description
+    });
+
+
+    save();
+
+    awards();
+
+}
+
+
+/* =====================================================
+SUBJECTS
+===================================================== */
+
+function subjects(){
+
+    render(
+
+        "دروس",
+
+        "مدیریت فهرست درس‌های مدرسه",
+
+        `
+
+        ${
+            current.type==="manager"
+            ?
+            `
+
+            <div class="card">
+
+                <h3 class="card-title">
+                    📚 افزودن درس
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            نام درس
+                        </label>
+
+                        <input
+                            id="subjectName"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            معلم
+                        </label>
+
+                        <input
+                            id="subjectTeacher"
+                            class="input"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            کلاس
+                        </label>
+
+                        <input
+                            id="subjectClass"
+                            class="input"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="addSubject()"
+                >
+                    افزودن درس
+                </button>
+
+            </div>
+
+            <br>
+
+            `
+            :
+            ""
+        }
+
+
+        <div class="grid">
+
+
+            ${
+                db.subjects.length
+
+                ?
+
+                db.subjects.map(
+                    s=>`
+
+                    <div class="card">
+
+                        <div
+                            style="
+                            font-size:30px;
+                            margin-bottom:10px
+                            "
+                        >
+                            📚
+                        </div>
+
+                        <h3>
+                            ${esc(s.name)}
+                        </h3>
+
+                        <p>
+                            👨‍🏫
+                            ${esc(s.teacher||"—")}
+                        </p>
+
+                        <p>
+                            🏫
+                            ${esc(s.class||"—")}
+                        </p>
+
+
+                        ${
+                            current.type==="manager"
+                            ?
+                            `
+                            <button
+                                class="btn red"
+                                onclick="remove('subjects',${s.id},subjects)"
+                            >
+                                حذف
+                            </button>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                    `
+                ).join("")
+
+                :
+
+                `
+                <div class="card empty">
+                    <div class="empty-icon">
+                        📚
+                    </div>
+                    هنوز درسی ثبت نشده است.
+                </div>
+                `
+
+            }
+
+        </div>
+
+        `,
+
+        "subjects"
+
+    );
+
+}
+
+
+function addSubject(){
+
+    const name =
+        document.getElementById("subjectName").value.trim();
+
+    const teacher =
+        document.getElementById("subjectTeacher").value.trim();
+
+    const cls =
+        document.getElementById("subjectClass").value.trim();
+
+
+    if(!name)
+        return alert("نام درس را وارد کن.");
+
+
+    db.subjects.push({
+        id:id(),
+        name,
+        teacher,
+        class:cls
+    });
+
+
+    save();
+
+    subjects();
+
+}
+
+
+/* =====================================================
+PROFILE
+===================================================== */
+
+function profile(){
+
+    render(
+
+        "پروفایل من",
+
+        "اطلاعات حساب کاربری",
+
+        `
+
+        <div class="card">
+
+            <div class="profile-head">
+
+                <div class="big-avatar">
+                    ${
+                        current.type==="manager"
+                        ?
+                        "👨‍💼"
+                        :
+                        "👨‍🎓"
+                    }
+                </div>
+
+                <div>
+
+                    <h2 style="margin:0">
+                        ${esc(current.name)}
+                    </h2>
+
+                    <p
+                        style="
+                        color:var(--muted);
+                        "
+                    >
+                        ${
+                            current.type==="manager"
+                            ?
+                            "مدیر سامانه"
+                            :
+                            "دانش‌آموز"
+                        }
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid">
+
+
+                <div>
+
+                    <b>
+                        نام کاربری
+                    </b>
+
+                    <p>
+                        ${esc(current.username)}
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <b>
+                        کلاس
+                    </b>
+
+                    <p>
+                        ${esc(current.class||"—")}
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <b>
+                        وضعیت حساب
+                    </b>
+
+                    <p>
+                        <span class="badge green">
+                            فعال
+                        </span>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `,
+
+        "profile"
+
+    );
+
+}
+
+
+/* =====================================================
+REMOVE
+===================================================== */
+
+function remove(collection,itemId,callback){
+
+    if(!confirm("این مورد حذف شود؟"))
+        return;
+
+
+    db[collection] =
+        db[collection].filter(
+            x=>x.id!==itemId
+        );
+
+
+    save();
+
+    callback();
+
+}
+
+
+/* =====================================================
+DARK MODE
+===================================================== */
+
+function toggleDark(){
+
+    document
+    .body
+    .classList
+    .toggle("dark");
+
+
+    localStorage.setItem(
+        "school_dark",
+        document.body.classList.contains("dark")
+        ?
+        "1"
+        :
+        "0"
+    );
+
+}
+
+
+if(
+    localStorage.getItem("school_dark")==="1"
+){
+
+    document.body.classList.add("dark");
+
+}
+
+
+/* =====================================================
+LOGOUT
+===================================================== */
+
+function logout(){
+
+    current=null;
+
+
+    document
+    .getElementById("app")
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById("loginScreen")
+    .classList
+    .remove("hidden");
+
+
+    document
+    .getElementById("loginUser")
+    .value="";
+
+
+    document
+    .getElementById("loginPass")
+    .value="";
+
+
+    document
+    .getElementById("loginError")
+    .textContent="";
+
+}
+
+</script>
+
+</body>
+</html>
